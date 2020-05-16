@@ -1,4 +1,5 @@
-﻿using CliFx;
+﻿using BasicLogger;
+using CliFx;
 using System;
 using System.Threading.Tasks;
 

@@ -24,7 +24,7 @@ namespace Student_Management_System.Commands
             {
                 Student.Student std = new Student.Student();
                
-                using (var fileManager = new FileManager("temp"))
+                using (var fileManager = new FileManager("temp.json"))
                 {
                     var temp = fileManager.GetValues();
                     foreach(var value in temp.Values)
@@ -32,16 +32,18 @@ namespace Student_Management_System.Commands
                         if(name == value.name)
                         {
                             std = value;
-                            if (age != null)
+                            if (age != default)
                                 std.age = age;
-                            if (subject != null)
+                            if (subject != default)
                                 std.subject = subject;
-                            if (gpa != null)
+                            if (gpa != default)
                                 std.gpa = gpa;
 
                             fileManager.Remove(name);
                             fileManager.AddValue(name, std);
-                            console.Output.WriteLine("Added Student with name " + name);
+                           string  tmp = "Added Student with name " + name;
+                            console.Output.WriteLine(tmp);
+                            FileManager.log.Information(tmp);
                             break;
                         }
                     }

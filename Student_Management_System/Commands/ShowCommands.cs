@@ -13,18 +13,36 @@ namespace Student_Management_System.Commands
         {
             public ValueTask ExecuteAsync(IConsole console)
             {
-                using (var fileManager = new FileManager("temp"))
+                using (var fileManager = new FileManager("temp.json"))
                 {
                     foreach (var data in fileManager.GetValues())
                     {
-                        
-                        console.Output.WriteLine("Student Name is: " + data.Key +
-                            "\nThe Student info is:");
-                        console.Output.WriteLine("ID: " + data.Value.id);
-                        console.Output.WriteLine("Name: " + data.Value.name);
-                        console.Output.WriteLine("Age: " + data.Value.age);
-                        console.Output.WriteLine("Subject: " + data.Value.subject);
-                        console.Output.WriteLine("GPA: " + data.Value.gpa + "\n");
+                        string temp = "Student Name is: " + data.Key +
+                            "\nThe Student info is:";
+
+                        console.Output.WriteLine(temp);
+                        FileManager.log.Information(temp);
+
+                        temp="ID: " + data.Value.id;
+                        console.Output.WriteLine(temp);
+                        FileManager.log.Information(temp);
+
+                        temp = "Name: " + data.Value.name;
+                        console.Output.WriteLine(temp);
+                        FileManager.log.Information(temp);
+
+                        temp = "Age: " + data.Value.age;
+                        console.Output.WriteLine(temp);
+                        FileManager.log.Information(temp);
+
+                        temp = "Subject: " + data.Value.subject;
+                        console.Output.WriteLine(temp);
+                        FileManager.log.Information(temp);
+
+                        temp = "GPA: " + data.Value.gpa + "\n";
+                        console.Output.WriteLine(temp);
+                        FileManager.log.Information(temp);
+
                     }
                     return default;
                 }

@@ -29,13 +29,14 @@ namespace Student_Management_System.Commands
                 std.age = age;
                 std.subject = subject;
                 std.gpa = gpa;
-                using (var fileManager = new FileManager("temp"))
+                using (var fileManager = new FileManager("temp.json"))
                 {
                     fileManager.AddValue(name, std);
 
-
+                    string temp = "Added Student with name " + name;
                     //inserting  a new Student into the ready queue
-                    console.Output.WriteLine("Added Student with name " + name);
+                    console.Output.WriteLine(temp);
+                    FileManager.log.Information(temp);
                     return default;
                 }
             }

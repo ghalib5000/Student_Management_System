@@ -15,7 +15,7 @@ namespace Student_Management_System.Commands
 
             public ValueTask ExecuteAsync(IConsole console)
             {
-                using (var fileManager = new FileManager("temp"))
+                using (var fileManager = new FileManager("temp.json"))
                 {
                     fileManager.Remove(Name);
                     return default;

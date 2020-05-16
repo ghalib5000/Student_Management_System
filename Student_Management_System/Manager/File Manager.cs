@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using BasicLogger;
 
 namespace Student_Management_System.Manager
 {
@@ -14,7 +15,7 @@ namespace Student_Management_System.Manager
             private Dictionary<string, Student.Student> dict;
 
             private static string DataFile = Path.Combine(Path.GetTempPath(), "data.json");
-
+            public static Logger log = new Logger("Student_log.txt", DateTime.Now.ToString());
             public FileManager()
             {
 
@@ -48,16 +49,22 @@ namespace Student_Management_System.Manager
                 dict.Add(key, value);
             }
 
+            
             public void Remove(string key)
             {
                 if (dict.ContainsKey(key))
                 {
                     dict.Remove(key);
-                    Console.WriteLine("Student " + key + " is removed from database");
+                    string temp = "Student " + key + " is removed from database";
+                    Console.WriteLine(temp);
+                    log.Information(temp);
 
                 }
-                else {
-                    Console.WriteLine("Name "+key +" does not exsist in the database" );
+                else
+                {
+                     string temp="Name " + key + " does not exist in the database";
+                    Console.WriteLine(temp);
+                    log.Information(temp);
                 }
             }
 

@@ -13,7 +13,6 @@ namespace Student_Management_System.Student
         public int age;
         public string subject;
         public double gpa;
-        public Student next;
 
         public Student()
         {
@@ -22,20 +21,8 @@ namespace Student_Management_System.Student
             this.age = 0;
             this.subject = null;
             this.gpa = 0;
-            next = null;
         }
 
-        public static void Return_Students(Student std)
-        {
-            while(std.next!=null)
-            {
-                Console.WriteLine("Student ID is: " + std.id);
-                Console.WriteLine("Student Name is: " + std.name);
-                Console.WriteLine("Student Age is: " + std.subject);
-                Console.WriteLine("Student Subject is: " + std.age);
-                Console.WriteLine("Student GPA is: " + std.gpa);
-                std = std.next;
-            }
-        }
+      
     }
 }
