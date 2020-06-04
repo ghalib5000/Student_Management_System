@@ -22,7 +22,6 @@ namespace Student_Management_System.Student
             this.subject = null;
             this.gpa = 0;
         }
-
       
     }
 }

@@ -12,7 +12,9 @@ namespace Student_Management_System.Commands
         [Command("update")]
         public class UpdateCommand : ICommand
         {
-            [CommandParameter(0, Description = "Name of the Student")]
+            [CommandParameter(0, Description = "ID of the Student")]
+            public int id { get; set; }
+            [CommandOption("name", 'n', Description = "Name of the Student")]
             public string name { get; set; }
             [CommandOption("age", 'a', Description = "Age of the Student")]
             public int age { get; set; }
@@ -27,9 +29,9 @@ namespace Student_Management_System.Commands
                 using (var fileManager = new FileManager("temp.json"))
                 {
                     var temp = fileManager.GetValues();
-                    foreach(var value in temp.Values)
+                    foreach (var value in temp.Values)
                     {
-                        if(name == value.name)
+                        if (id == value.id)
                         {
                             std = value;
                             if (age != default)
@@ -39,15 +41,15 @@ namespace Student_Management_System.Commands
                             if (gpa != default)
                                 std.gpa = gpa;
 
-                            fileManager.Remove(name);
-                            fileManager.AddValue(name, std);
-                           string  tmp = "Added Student with name " + name;
+                            fileManager.Remove(id,std.name);
+                           fileManager.AddValue(id, std);
+                            string tmp = "Updated Student with name " + std.name;
                             console.Output.WriteLine(tmp);
                             FileManager.log.Information(tmp);
                             break;
                         }
-                    }
 
+                    }
 
                     return default;
                 }

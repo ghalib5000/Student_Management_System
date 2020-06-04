@@ -10,14 +10,14 @@ namespace Student_Management_System.Commands
         [Command("remove")]
         public class RemoveCommand : ICommand
         {
-            [CommandParameter(0, Description = "Name of the Student.")]
-            public string Name { get; set; }
+            [CommandParameter(0, Description = "ID of the Student.")]
+            public int  ID { get; set; }
 
             public ValueTask ExecuteAsync(IConsole console)
             {
                 using (var fileManager = new FileManager("temp.json"))
                 {
-                    fileManager.Remove(Name);
+                    fileManager.Remove(ID);
                     return default;
                 }
             }

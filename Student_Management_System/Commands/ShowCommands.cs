@@ -17,7 +17,7 @@ namespace Student_Management_System.Commands
                 {
                     foreach (var data in fileManager.GetValues())
                     {
-                        string temp = "Student Name is: " + data.Key +
+                        string temp = "Student Name is: " + data.Value.name +
                             "\nThe Student info is:";
 
                         console.Output.WriteLine(temp);

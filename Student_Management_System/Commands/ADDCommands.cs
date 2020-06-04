@@ -1,5 +1,6 @@
 ﻿using CliFx;
 using CliFx.Attributes;
+using System.IO;
 using System.Threading.Tasks;
 using static Student_Management_System.Manager.File_Manager;
 
@@ -24,14 +25,15 @@ namespace Student_Management_System.Commands
             public ValueTask ExecuteAsync(IConsole console)
             {
                 std = new Student.Student();
-                std.id = i;
                 std.name = name;
                 std.age = age;
                 std.subject = subject;
                 std.gpa = gpa;
                 using (var fileManager = new FileManager("temp.json"))
                 {
-                    fileManager.AddValue(name, std);
+                    i = fileManager.GetValues().Count;
+                    std.id = i;
+                    fileManager.AddValue(std.id, std);
 
                     string temp = "Added Student with name " + name;
                     //inserting  a new Student into the ready queue

@@ -12,7 +12,7 @@ namespace Student_Management_System.Manager
     {
         public class FileManager : IDisposable
         {
-            private Dictionary<string, Student.Student> dict;
+            private Dictionary<int, Student.Student> dict;
 
             private static string DataFile = Path.Combine(Path.GetTempPath(), "data.json");
             public static Logger log = new Logger("Student_log.txt", DateTime.Now.ToString());
@@ -21,10 +21,10 @@ namespace Student_Management_System.Manager
 
                 if (File.Exists(DataFile))
                 {
-                    dict = JsonConvert.DeserializeObject<Dictionary<string, Student.Student>>(File.ReadAllText(DataFile));
+                    dict = JsonConvert.DeserializeObject<Dictionary<int, Student.Student>>(File.ReadAllText(DataFile));
                 }
                 else
-                    dict = new Dictionary<string, Student.Student>();
+                    dict = new Dictionary<int, Student.Student>();
             }
 
             public FileManager(string location)
@@ -38,31 +38,51 @@ namespace Student_Management_System.Manager
                 DataFile = Path.Combine(currentPath + location);
                 if (File.Exists(DataFile))
                 {
-                    dict = JsonConvert.DeserializeObject<Dictionary<string, Student.Student>>(File.ReadAllText(DataFile));
+                    dict = JsonConvert.DeserializeObject<Dictionary<int, Student.Student>>(File.ReadAllText(DataFile));
                 }
                 else
-                    dict = new Dictionary<string, Student.Student>();
+                    dict = new Dictionary<int, Student.Student>();
             }
 
-            public void AddValue(string key, Student.Student value)
+            public void AddValue(int key, Student.Student value)
             {
+
                 dict.Add(key, value);
+              
             }
 
-            
-            public void Remove(string key)
+
+            public void Remove(int key)
             {
                 if (dict.ContainsKey(key))
                 {
                     dict.Remove(key);
-                    string temp = "Student " + key + " is removed from database";
+                    string temp = "Student with ID: " + key + " is removed from database";
                     Console.WriteLine(temp);
                     log.Information(temp);
 
                 }
                 else
                 {
-                     string temp="Name " + key + " does not exist in the database";
+                    string temp = "ID " + key + " does not exist in the database";
+                    Console.WriteLine(temp);
+                    log.Information(temp);
+                }
+            }
+            public void Remove(int key,string name)
+            {
+                if (dict.ContainsKey(key))
+                {
+                    
+                    dict.Remove(key);
+                    string temp = "Student " + name + " is removed from database";
+                    //Console.WriteLine(temp);
+                    log.Information(temp);
+
+                }
+                else
+                {
+                    string temp = "Name " + name + " does not exist in the database";
                     Console.WriteLine(temp);
                     log.Information(temp);
                 }
@@ -74,7 +94,7 @@ namespace Student_Management_System.Manager
                 File.WriteAllText(DataFile, json);
             }
 
-            public Dictionary<string, Student.Student> GetValues()
+            public Dictionary<int, Student.Student> GetValues()
             {
                 return dict;
             }
